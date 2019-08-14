@@ -8,7 +8,12 @@ var server = http.createServer((req, res) => {
     //     res.write(data);
     //     res.end();
     // });
-    res.writeHead(200, { 'Content-type': 'text/plain' });
+    res.writeHead(200, {
+        'Content-type': 'text/plain',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    });
+
     var url = req.url;
     var visitorName = url.substr(1);
 
@@ -27,7 +32,7 @@ var server = http.createServer((req, res) => {
 
         fs.writeFile('data.json', JSON.stringify(visitors), (errs) => { });
 
-        res.end('Hello World! ' + JSON.stringify(visitors));
+        res.end(JSON.stringify(visitors));
     });
 
     // var url = req.url;
@@ -36,4 +41,4 @@ var server = http.createServer((req, res) => {
     // heeyaModule.recoreVisitor(name);
 
     // res.end('Hello World! ' + heeyaModule.showVisitors());
-}).listen(8080);
+}).listen(8090);
